@@ -1,0 +1,9 @@
+{
+  "name": "redigg",
+  "version": "1.0.0",
+  "description": "CSCE 464 MEAN stack homework",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-generator": "^4.16.0"
+  }
+}
