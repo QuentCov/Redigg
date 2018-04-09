@@ -1,2 +1,22 @@
+# obtained from https://github.com/github/gitignore/blob/master/Global/Eclipse.gitignore
+/build/
+
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.classpath
+.project
+.loadpath
+.recommenders
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
 
 node_modules/
