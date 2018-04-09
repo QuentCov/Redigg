@@ -1,7 +1,10 @@
-var http = require('http');
-http.createServer(function (request, response) {
-    response.statusCode = 200;
-    response.setHeader('Content-Type', 'text/plain');
-    response.end('Welcome to the first Node.js App!\n);
-}).listen(3000);
-console.log('Server runnint at http://localhost:3000/');
+var express = require('express');
+var app = express();
+
+app.get('/', function(req, res) {
+	res.send("Welcome to the first Node.js App!");
+});
+
+app.listen(3000, function() {
+    console.log("Server running at http://localhost:3000/");
+});

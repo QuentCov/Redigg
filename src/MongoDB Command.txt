@@ -1,0 +1,2 @@
+//This is so I don't have to type out the command every time. We can make this a script later if needed.
+"C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe"
