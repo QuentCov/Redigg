@@ -2,7 +2,6 @@
 /build/
 
 .metadata
-bin/
 tmp/
 *.tmp
 *.bak
@@ -17,6 +16,5 @@ local.properties
 
 # Locally stored "Eclipse launch configurations"
 *.launch
-
 
 node_modules/
