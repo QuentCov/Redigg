@@ -1,5 +1,5 @@
 
-use articles;
+use Redigg;
 
 db.articles.drop();
 
@@ -8,7 +8,7 @@ var r = {
         "URL": "http://kol.coldfront.net/thekolwiki/index.php/Guy_Made_Of_Bees",
         "votes": 6,
         "user": "Pie_Prime",
-        "comments": 
+        "comments":
         [
             {
                 "commentid": 0,
@@ -27,7 +27,7 @@ var r = {
         "URL": "http://kol.coldfront.net/thekolwiki/index.php/Eleven",
         "votes": 11,
         "user": "Original Pie",
-        "comments": 
+        "comments":
         [
                 {
                         "commentid": 0,
@@ -46,7 +46,7 @@ var r = {
         "URL": "http://kol.coldfront.net/thekolwiki/index.php/Ed_the_Undying",
         "votes": 30,
         "user": "Pie_Prime",
-        "comments": 
+        "comments":
         [
                 {
                         "commentid": 0,
@@ -83,7 +83,7 @@ var r = {
         "URL": "http://busket.tumblr.com/post/164661140228/bennettflynt-busket-where-is-that-cat-with",
         "votes": 1,
         "user": "Quentin",
-        "comments": 
+        "comments":
         [
             {
                 "commentid": 0,
