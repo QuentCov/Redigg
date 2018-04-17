@@ -5,11 +5,6 @@ var monk = require('monk');
 var db = monk('localhost:27017/Redigg');
 var ObjectID = require('mongodb').ObjectID;
 
-router.get('/:articleid/:commentid', function(req, res) {
-	console.log("Yep.");
-	res.json(res);
-})
-
 router.delete('/:articleid/:commentid', function(req, res) {
 	var collection = db.get('articles');
 	collection.update({ _id: ObjectID(req.params.articleid) }, { "$pull": { 'comments': { commentid: parseInt(req.params.commentid) } } }, function(err, response) {
