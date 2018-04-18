@@ -83,7 +83,7 @@ router.delete("/:articleid", (req, res) => {
     });
 });
 
-//TODO TEST ME
+// increment or decrement article votes
 router.put("/:articleid", (req, res) => {
     const collection = db.get("articles");
     if(req.body.vote == true) {
@@ -91,18 +91,18 @@ router.put("/:articleid", (req, res) => {
         collection.update(
             {_id: req.params.articleid},
             {$inc: {votes: 1}},
-            (err, article) => {
+            (err, result) => {
                 if (err) throw err;
-                res.json(article);
+                res.json(result);
         });
     } else {
         //downvote
         collection.update(
             {_id: req.params.articleid},
             {$inc: {votes: -1}},
-            (err, article) => {
+            (err, result) => {
                 if (err) throw err;
-                res.json(article);
+                res.json(result);
         });
     }
 });
