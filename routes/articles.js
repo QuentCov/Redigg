@@ -108,33 +108,40 @@ router.put("/:articleid", (req, res) => {
     }
 });
 
+// delete comment on article
 router.delete('/:articleid/:commentid', function(req, res) {
 	var collection = db.get('articles');
-	collection.update({ _id: ObjectID(req.params.articleid) }, { "$pull": { 'comments': { commentid: parseInt(req.params.commentid) } } }, function(err, response) {
-		if (err) throw err;
-		res.json(response);
+	collection.update(
+        { _id: ObjectID(req.params.articleid) },
+        { "$pull": { 'comments': { commentid: parseInt(req.params.commentid) } } },
+        function(err, response) {
+    		if (err) throw err;
+    		res.json(response);
 	});
 });
 
+// increment or decrement comment votes
 router.put('/:articleid/:commentid', function(req, res) {
 	var collection = db.get('articles');
-	//TODO: Update this when we make the pages themselves. We'll need some way to differentiate.
-	//if(req.body.vote == true) {
+	if(req.body.vote == true) {
 		//Upvote
-		collection.update({_id: ObjectID(req.params.articleid), "comments.commentid" : parseInt(req.params.commentid)},
-							 {"$inc": {"comments.$.votes": 1}}, function(err, response) {
-			if (err) throw err;
-			res.json(response);
+		collection.update(
+            {_id: ObjectID(req.params.articleid), "comments.commentid" : parseInt(req.params.commentid)},
+			{"$inc": {"comments.$.votes": 1}},
+            function(err, response) {
+    			if (err) throw err;
+    			res.json(response);
 		});
-	/*} else {
+	} else {
 		//Downvote
-		collection.update({_id: req.params.articleid, "comments.commentid" : req.params.commentid},
-							 {"$inc": {"comments.$.votes": -1}}, function(err, response) {
-			if (err) throw err;
-			res.json(response);
+		collection.update(
+            {_id: ObjectID(req.params.articleid), "comments.commentid" : parseInt(req.params.commentid)},
+			{"$inc": {"comments.$.votes": -1}},
+            function(err, response) {
+    			if (err) throw err;
+    			res.json(response);
 		});
-	}*/
-
+	}
 });
 
 module.exports = router;
