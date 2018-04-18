@@ -3,7 +3,7 @@ var router = express.Router();
 
 var monk = require('monk');
 var db = monk('localhost:27017/Redigg');
-var ObjectID = require('mongodb').ObjectID;\
+var ObjectID = require('mongodb').ObjectID;
 
 router.get("/", (req, res) => {
     const collection = db.get("articles");
@@ -41,14 +41,14 @@ router.put('/:articleid/:commentid', function(req, res) {
 	//TODO: Update this when we make the pages themselves. We'll need some way to differentiate.
 	//if(req.body.vote == true) {
 		//Upvote
-		collection.update({_id: ObjectID(req.params.articleid), "comments.commentid" : parseInt(req.params.commentid)}, 
+		collection.update({_id: ObjectID(req.params.articleid), "comments.commentid" : parseInt(req.params.commentid)},
 							 {"$inc": {"comments.$.votes": 1}}, function(err, response) {
 			if (err) throw err;
 			res.json(response);
 		});
 	/*} else {
 		//Downvote
-		collection.update({_id: req.params.articleid, "comments.commentid" : req.params.commentid}, 
+		collection.update({_id: req.params.articleid, "comments.commentid" : req.params.commentid},
 							 {"$inc": {"comments.$.votes": -1}}, function(err, response) {
 			if (err) throw err;
 			res.json(response);
