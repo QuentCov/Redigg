@@ -15,7 +15,7 @@
         <div class="card-body">
             <h2 class="card-title">{{article.title}}</h2>
             <a href={{article.URL}} class="btn btn-primary">Go To Article</a>
-            <a href="" class="btn btn-secondary">Go To Comments</a>
+            <a href="/#/viewcomments/{{article._id}}" class="btn btn-secondary">Go To Comments</a>
             <button class="btn btn-danger" ng-click="delete(article._id)">Delete Article</a>
         </div>
     </div>
