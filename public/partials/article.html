@@ -1,0 +1,48 @@
+<button href="/">Home</button>
+
+<h1>{{article.title}}</h1>
+
+<div>
+	<a ng-click="upvoteArticle()"><span class="glyphicon glyphicon-arrow-up"></span></a>
+	<h3>{{article.votes}}</h3>
+	<a ng-click="downvoteArticle()"><span class="glyphicon glyphicon-arrow-down"></span></a>
+</div>
+
+<h2>{{article.URL}}</h2>
+<h2>{{article.user}}</h2>
+
+<br>
+<br>
+
+<h3 ng-repeat="comment in article.comments">
+	<h4>{{comment.user}}</h4>
+	<h4>{{comment.date}}</h4>
+	<br>
+	<button ng-click="upvoteComment()"><span class="glyphicon glyphicon-arrow-up"></span></button>
+	<h3>{{comment.votes}}</h3>
+	<button ng-click="downvoteComment()"><span class="glyphicon glyphicon-arrow-down"></span></button>
+	<br>
+	<p>{{comment.body}}</p>
+	<br>
+	<button ng-click="delete()">Delete</button>
+	<button ng-click="/#/comment/{{article._id}}/{{comment.commentid}}">Edit</button>
+</h3>
+
+<br>
+
+<h3>Respond to this Article!</h3>
+<form>
+    <div class="form-group">
+        <label>UserName</label>
+        <textarea class="form-control" ng-model="comment.user"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Date</label>
+        <textarea class="form-control" ng-model="comment.date"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Body</label>
+        <textarea class="form-control" ng-model="comment.body"></textarea>
+    </div>
+    <input type="button" class="btn btn-primary" value="Submit" ng-click="submit()"></input>
+</form>
