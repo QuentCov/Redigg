@@ -4,14 +4,14 @@
             <a class="btn btn-primary" href="/#/">Home</a>
             <a href="/#/add-article" class="btn btn-primary">Create New Article</a>
             <h1>{{article.title}}</h1>
-            <a href="{{article.URL}}" class="btn btn-primary">Go to article</a>
+            <a href="{{article.URL}}" class="btn btn-primary">Go to Article</a>
             <p>Submitted by: &nbsp;{{article.user}}</p>
         </div>
         <div class="col-sm-2">
             <h3>Article Votes</h3>
-            <a ng-click="upvoteArticle()"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            <button ng-click="upvoteArticle()" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up">Upvote</span></button>
             <h3>{{article.votes}}</h3>
-            <a ng-click="downvoteArticle()"><span class="glyphicon glyphicon-arrow-down"></span></a>
+            <button ng-click="downvoteArticle()" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-down">Downvote</span></button>
         </div>
     </div>
 </div>
@@ -24,9 +24,9 @@
             <h5>{{comment.body}}</h5>
         </div>
         <div class="col-sm-1 justify-content-center">
-    		<a ng-click="upvoteComment(comment.commentid)"><span class="glyphicon glyphicon-arrow-up"></span></a>
+    		<button ng-click="upvoteComment(comment.commentid)" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up">Upvote</span></button>
     		<p >{{comment.votes}}</p>
-    		<a ng-click="downvoteComment(comment.commentid)"><span class="glyphicon glyphicon-arrow-down"></span></a>
+    		<button ng-click="downvoteComment(comment.commentid)" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-down">Downvote</span></button>
         </div>
         <div class="col-sm-2">
             <button class="btn btn-primary" ng-click="delete(comment.commentid)">Delete</button>
