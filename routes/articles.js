@@ -3,7 +3,6 @@ var router = express.Router();
 
 var monk = require('monk');
 var db = monk('localhost:27017/Redigg');
-var ObjectID = require('mongodb').ObjectID;
 
 // get all articles
 router.get("/", (req, res) => {
@@ -41,7 +40,7 @@ router.get("/:articleid", (req, res) => {
         {_id: req.params.articleid},
         (err, article) => {
             if (err) throw err;
-            res.json(article);
+            res.json(article[0]);
     });
 });
 
@@ -112,12 +111,24 @@ router.put("/:articleid", (req, res) => {
 router.delete('/:articleid/:commentid', function(req, res) {
 	var collection = db.get('articles');
 	collection.update(
-        { _id: ObjectID(req.params.articleid) },
+        { _id: req.params.articleid },
         { "$pull": { 'comments': { commentid: parseInt(req.params.commentid) } } },
         function(err, response) {
     		if (err) throw err;
     		res.json(response);
 	});
+});
+
+
+// get comment by article and comment id's
+router.get("/:articleid/:commentid", (req, res) => {
+    const collection = db.get("articles");
+    collection.find(
+        {_id: req.params.articleid},
+        (err, article) => {
+            if (err) throw err;
+            res.json(article[0].comments[req.params.commentid]);
+    });
 });
 
 // increment or decrement comment votes
@@ -126,7 +137,7 @@ router.put('/:articleid/:commentid', function(req, res) {
 	if(req.body.vote == true) {
 		//Upvote
 		collection.update(
-            {_id: ObjectID(req.params.articleid), "comments.commentid" : parseInt(req.params.commentid)},
+            {_id: req.params.articleid, "comments.commentid" : parseInt(req.params.commentid)},
 			{"$inc": {"comments.$.votes": 1}},
             function(err, response) {
     			if (err) throw err;
@@ -135,7 +146,7 @@ router.put('/:articleid/:commentid', function(req, res) {
 	} else {
 		//Downvote
 		collection.update(
-            {_id: ObjectID(req.params.articleid), "comments.commentid" : parseInt(req.params.commentid)},
+            {_id: req.params.articleid, "comments.commentid" : parseInt(req.params.commentid)},
 			{"$inc": {"comments.$.votes": -1}},
             function(err, response) {
     			if (err) throw err;
