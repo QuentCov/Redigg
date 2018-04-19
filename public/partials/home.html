@@ -4,6 +4,17 @@
     <a href="/#/add-article" class="btn btn-primary">Create New Article</a>
 </div>
 
+<form>
+    <div class="form-group">
+        <label for="query">Search for articles: </label>
+        <input type="text" class="form-control" id="query" placeholder="Search By Article Title" ng-model="searchQuery" value="searchQuery">
+    </div>
+    <button class="btn btn-primary" ng-click="searchByTitle()">Search</button>
+    <button class="btn btn-secondary" ng-click="resetSearch()">Reset</button>
+</form>
+
+<br>
+
 <div ng-repeat='article in articles'>
     <div class="card text-center">
         <div class="card-header">

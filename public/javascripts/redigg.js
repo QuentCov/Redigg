@@ -36,6 +36,21 @@ app.controller('homeCtrl', ['$scope', '$resource', '$route',
                 $route.reload();
             })
         }
+
+        $scope.searchByTitle = function(){
+            var articles = $resource('/api/articles');
+        	articles.query(function(allArticles){
+        		$scope.articles = allArticles.filter((article) => article.title.toUpperCase().match($scope.searchQuery.toUpperCase()));
+        	});
+        }
+
+        $scope.resetSearch = function(){
+            var articles = $resource('/api/articles');
+        	articles.query(function(articles){
+        		$scope.articles = articles;
+                $route.reload();
+        	});
+        }
 	}
 ]);
 
