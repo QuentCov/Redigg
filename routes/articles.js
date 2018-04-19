@@ -40,7 +40,7 @@ router.get("/:articleid", (req, res) => {
         {_id: req.params.articleid},
         (err, article) => {
             if (err) throw err;
-            res.json(article);
+            res.json(article[0]);
     });
 });
 
@@ -55,12 +55,16 @@ router.post("/:articleid", (req, res) => {
             // increment count of comments in article to get new id
             const newCommentId = article[0].comments.length++;
             // create payload and perform update
+            var votes = 0;
+            if(req.body.votes) {
+                votes = req.body.votes;
+            }
             const comment = {
                 commentid: newCommentId,
                 body: req.body.body,
                 date: req.body.date,
                 user: req.body.user,
-                votes: 0
+                votes: votes
             };
             collection.update(
                 {_id: req.params.articleid},
@@ -117,6 +121,20 @@ router.delete('/:articleid/:commentid', function(req, res) {
     		if (err) throw err;
     		res.json(response);
 	});
+});
+
+
+// get comment by article and comment id's
+router.get("/:articleid/:commentid", (req, res) => {
+    const collection = db.get("articles");
+    console.log(req.params.articleid);
+    console.log(req.params.commentid);
+    collection.find(
+        {_id: req.params.articleid},
+        (err, article) => {
+            if (err) throw err;
+            res.json(article[0].comments[req.params.commentid]);
+    });
 });
 
 // increment or decrement comment votes
