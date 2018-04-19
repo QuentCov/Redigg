@@ -55,16 +55,12 @@ router.post("/:articleid", (req, res) => {
             // increment count of comments in article to get new id
             const newCommentId = article[0].comments.length++;
             // create payload and perform update
-            var votes = 0;
-            if(req.body.votes) {
-                votes = req.body.votes;
-            }
             const comment = {
                 commentid: newCommentId,
                 body: req.body.body,
                 date: req.body.date,
                 user: req.body.user,
-                votes: votes
+                votes: 0
             };
             collection.update(
                 {_id: req.params.articleid},
@@ -127,8 +123,6 @@ router.delete('/:articleid/:commentid', function(req, res) {
 // get comment by article and comment id's
 router.get("/:articleid/:commentid", (req, res) => {
     const collection = db.get("articles");
-    console.log(req.params.articleid);
-    console.log(req.params.commentid);
     collection.find(
         {_id: req.params.articleid},
         (err, article) => {
