@@ -15,16 +15,23 @@ app.config(['$routeProvider', function($routeProvider){
         });
 }]);
 
-app.controller('homeCtrl', ['$scope', '$resource',
-    function($scope, $resource){
+app.controller('homeCtrl', ['$scope', '$resource', '$route',
+    function($scope, $resource, $route){
     	var articles = $resource('/api/articles');
     	articles.query(function(articles){
     		$scope.articles = articles;
     	});
+
+        $scope.delete = function(id){
+            var article = $resource('/api/articles/' + id);
+            article.delete({}, function(){
+                $route.reload();
+            })
+        }
 	}
 ]);
 
-app.controller('addArticleCtrl', ['$scope', '$resource', '$location', 
+app.controller('addArticleCtrl', ['$scope', '$resource', '$location',
     function($scope, $resource, $location){
         $scope.save = function(){
         	var articles = $resource('/api/articles');
