@@ -6,6 +6,10 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl: 'partials/home.html',
             controller: 'homeCtrl'
         })
+        .when('/add-article', {
+            templateUrl: 'partials/addArticle.html',
+            controller: 'addArticleCtrl'
+        })
         .when('/viewcomments/:articleid', {
             templateUrl: 'partials/article.html',
             controller: 'articleCtrl'
@@ -19,14 +23,33 @@ app.config(['$routeProvider', function($routeProvider){
         });
 }]);
 
-app.controller('homeCtrl', ['$scope', '$resource',
-    function($scope, $resource){
+app.controller('homeCtrl', ['$scope', '$resource', '$route',
+    function($scope, $resource, $route){
     	var articles = $resource('/api/articles');
     	articles.query(function(articles){
     		$scope.articles = articles;
     	});
+
+        $scope.delete = function(id){
+            var article = $resource('/api/articles/' + id);
+            article.delete({}, function(){
+                $route.reload();
+            })
+        }
 	}
 ]);
+
+app.controller('addArticleCtrl', ['$scope', '$resource', '$location',
+    function($scope, $resource, $location){
+        $scope.save = function(){
+        	var articles = $resource('/api/articles');
+        	articles.save($scope.article, function(){
+        		$location.path('/');
+        	});
+        }
+	}
+]);
+
 
 app.controller('editCtrl', ['$scope', '$resource', '$location', '$routeParams',
     function($scope, $resource, $location, $routeParams){

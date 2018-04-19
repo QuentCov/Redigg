@@ -1,41 +1,44 @@
-<a class="btn btn-primary" href="/#/">Home</a>
-
-<h1>{{article.title}}</h1>
-
-<div>
-	<a ng-click="upvoteArticle()"><span class="glyphicon glyphicon-arrow-up"></span></a>
-	<h3>{{article.votes}}</h3>
-	<a ng-click="downvoteArticle()"><span class="glyphicon glyphicon-arrow-down"></span></a>
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-sm-10">
+            <a class="btn btn-primary" href="/#/">Home</a>
+            <a href="/#/add-article" class="btn btn-primary">Create New Article</a>
+            <h1>{{article.title}}</h1>
+            <a href="{{article.URL}}" class="btn btn-primary">Go to article</a>
+            <p>Submitted by: &nbsp;{{article.user}}</p>
+        </div>
+        <div class="col-sm-2">
+            <h3>Article Votes</h3>
+            <a ng-click="upvoteArticle()"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            <h3>{{article.votes}}</h3>
+            <a ng-click="downvoteArticle()"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </div>
+    </div>
 </div>
-
-<h2><a href="{{article.URL}}">{{article.URL}}</a></h2>
-<h3>{{article.user}}</h3>
-
-<br>
-<br>
 
 <div ng-repeat="comment in article.comments">
-	<div ng-if="comment.user">
-		<h3>{{comment.user}}</h3>
-		<h4>{{comment.date}}</h4>
-		<br>
-		<a ng-click="upvoteComment(comment.commentid)"><span class="glyphicon glyphicon-arrow-up"></span></a>
-		<h3>{{comment.votes}}</h3>
-		<a ng-click="downvoteComment(comment.commentid)"><span class="glyphicon glyphicon-arrow-down"></span></a>
-		<br>
-		<h5>{{comment.body}}</h5>
-		<br>
-		<button class="btn btn-primary" ng-click="delete(comment.commentid)">Delete</button>
-		<button class="btn btn-primary" ng-click="edit(comment.commentid)">Edit</button>
+	<div ng-if="comment.user" class="row comment">
+		<p class="col-sm-2">User: &nbsp;{{comment.user}}</p>
+		<p class="col-sm-2">Date: &nbsp;{{comment.date}}</p>
+        <div class="col-sm-5">
+            <h5>{{comment.body}}</h5>
+        </div>
+        <div class="col-sm-1 justify-content-center">
+    		<a ng-click="upvoteComment(comment.commentid)"><span class="glyphicon glyphicon-arrow-up"></span></a>
+    		<p >{{comment.votes}}</p>
+    		<a ng-click="downvoteComment(comment.commentid)"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-primary" ng-click="delete(comment.commentid)">Delete</button>
+            <button class="btn btn-primary" ng-click="edit(comment.commentid)">Edit</button>
+        </div>
 	</div>
 </div>
-
-<br>
 
 <h3>Respond to this Article!</h3>
 <form>
     <div class="form-group">
-        <label>UserName</label>
+        <label>User</label>
         <textarea class="form-control" ng-model="newComment.user"></textarea>
     </div>
     <div class="form-group">

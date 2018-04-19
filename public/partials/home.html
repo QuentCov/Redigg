@@ -1,5 +1,22 @@
-<h1>Redigg Home Page</h1>
+<div class="jumbotron">
+    <h1>Redigg Home Page</h1>
+    <p class="lead">The home for all your linking needs.</p>
+    <a href="/#/add-article" class="btn btn-primary">Create New Article</a>
+</div>
 
-<ul>
-    <li ng-repeat='article in articles'><a href="/#/viewcomments/{{article._id}}">{{article.title}}</a></li>
-</ul>
+<div ng-repeat='article in articles'>
+    <div class="card text-center">
+        <div class="card-header">
+            <div class="row justify-content-around">
+                <p>Votes: {{article.votes}}</p>
+                <p>Submitted by: {{article.user}}</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <h2 class="card-title">{{article.title}}</h2>
+            <a href={{article.URL}} class="btn btn-primary">Go To Article</a>
+            <a href="/#/viewcomments/{{article._id}}" class="btn btn-secondary">Go To Comments</a>
+            <button class="btn btn-danger" ng-click="delete(article._id)">Delete Article</a>
+        </div>
+    </div>
+</div>

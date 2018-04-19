@@ -1,0 +1,21 @@
+<div class="jumbotron">
+    <h1>Add Redigg Article</h1>
+    <p class="lead">Add an article to Redigg for others to see</p>
+    <a href="/#/" class="btn btn-primary">Go to Homepage</a>
+</div>
+
+<form>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" placeholder="Enter title" ng-model="article.title">
+    </div>
+    <div class="form-group">
+        <label for="URL">URL</label>
+        <input type="text" class="form-control" id="URL" placeholder="Enter article url" ng-model="article.URL">
+    </div>
+    <div class="form-group">
+        <label for="user">Username</label>
+        <input type="text" class="form-control" id="user" placeholder="Enter username" ng-model="article.user">
+    </div>
+    <button type="submit" class="btn btn-primary" ng-click="save()">Submit</button>
+</form>

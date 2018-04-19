@@ -20,9 +20,9 @@ router.post("/", (req, res) => {
     const article = {
         title: req.body.title,
         URL: req.body.URL,
-        votes: req.body.votes,
+        votes: 0,
         user: req.body.user,
-        comments: req.body.comments
+        comments: []
     };
     const collection = db.get("articles");
     collection.insert(
